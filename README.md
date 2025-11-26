@@ -1,4 +1,4 @@
-/># checkout service - documentation
+# checkout service - documentation
 
 <img width="1574" height="394" alt="image" src="https://github.com/user-attachments/assets/fa74aeef-4983-443a-abb7-474bbbaf3edc" />
 
