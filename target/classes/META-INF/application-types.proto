@@ -1,0 +1,62 @@
+syntax = "proto2"; 
+package org.kie.kogito.app; 
+import "kogito-types.proto";
+
+message CartItemDto { 
+	option java_package = "app.checkout.dto";
+	optional kogito.Serializable price = 1[(kogito_java_class) = "java.math.BigDecimal"]; 
+	optional string productId = 2; 
+	optional string productName = 3; 
+	optional int32 quantity = 4; 
+}
+message CheckoutProcessData { 
+	option java_package = "app.checkout.bpm";
+	optional string errorMessage = 1; 
+	optional OrderResponseDto order = 2; 
+	optional string orderId = 3; 
+	optional bool paymentSuccess = 4; 
+	optional CheckoutRequestDto request = 5; 
+	optional bool stockAvailable = 6; 
+}
+message CheckoutRequestDto { 
+	option java_package = "app.checkout.dto";
+	optional string customerEmail = 1; 
+	optional string customerId = 2; 
+	repeated CartItemDto items = 3; 
+	optional string paymentMethod = 4; 
+	optional ShippingAddressDto shippingAddress = 5; 
+	optional kogito.Serializable totalAmount = 6[(kogito_java_class) = "java.math.BigDecimal"]; 
+}
+message OrderItemDto { 
+	option java_package = "app.checkout.dto";
+	optional string id = 1; 
+	optional kogito.Serializable price = 2[(kogito_java_class) = "java.math.BigDecimal"]; 
+	optional string productId = 3; 
+	optional string productName = 4; 
+	optional int32 quantity = 5; 
+	optional kogito.Serializable subtotal = 6[(kogito_java_class) = "java.math.BigDecimal"]; 
+}
+message OrderResponseDto { 
+	option java_package = "app.checkout.dto";
+	optional kogito.Serializable createdAt = 1[(kogito_java_class) = "java.time.LocalDateTime"]; 
+	optional string customerEmail = 2; 
+	optional string customerId = 3; 
+	optional string id = 4; 
+	repeated OrderItemDto items = 5; 
+	optional string orderNumber = 6; 
+	optional string orderStatus = 7; 
+	optional string paymentMethod = 8; 
+	optional string paymentStatus = 9; 
+	optional string processInstanceId = 10; 
+	optional string shippingAddress = 11; 
+	optional kogito.Serializable totalAmount = 12[(kogito_java_class) = "java.math.BigDecimal"]; 
+	optional kogito.Serializable updatedAt = 13[(kogito_java_class) = "java.time.LocalDateTime"]; 
+}
+message ShippingAddressDto { 
+	option java_package = "app.checkout.dto";
+	optional string city = 1; 
+	optional string phoneNumber = 2; 
+	optional string postalCode = 3; 
+	optional string province = 4; 
+	optional string street = 5; 
+}

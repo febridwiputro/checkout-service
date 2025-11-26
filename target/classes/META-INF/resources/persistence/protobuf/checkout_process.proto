@@ -1,0 +1,134 @@
+syntax = "proto2"; 
+package app.checkout.bpm.checkout_process; 
+import "kogito-index.proto";
+import "kogito-types.proto";
+option kogito_model = "Checkout_process";
+option kogito_id = "checkout_process";
+
+/* @Indexed */ 
+message CartItemDto { 
+	option java_package = "app.checkout.dto";
+	/* @Field(index = Index.YES, store = Store.YES) @SortableField */ 
+	optional kogito.Serializable price = 1[(kogito_java_class) = "java.math.BigDecimal"]; 
+	/* @Field(index = Index.YES, store = Store.YES) @SortableField */ 
+	optional string productId = 2; 
+	/* @Field(index = Index.YES, store = Store.YES) @SortableField */ 
+	optional string productName = 3; 
+	/* @Field(index = Index.YES, store = Store.YES) @SortableField */ 
+	optional int32 quantity = 4; 
+}
+/* @Indexed */ 
+message CheckoutProcessData { 
+	option java_package = "app.checkout.bpm";
+	/* @Field(index = Index.YES, store = Store.YES) @SortableField */ 
+	optional string errorMessage = 1; 
+	/* @Field(index = Index.YES, store = Store.YES) @SortableField */ 
+	optional OrderResponseDto order = 2; 
+	/* @Field(index = Index.YES, store = Store.YES) @SortableField */ 
+	optional string orderId = 3; 
+	/* @Field(index = Index.YES, store = Store.YES) @SortableField */ 
+	optional bool paymentSuccess = 4; 
+	/* @Field(index = Index.YES, store = Store.YES) @SortableField */ 
+	optional CheckoutRequestDto request = 5; 
+	/* @Field(index = Index.YES, store = Store.YES) @SortableField */ 
+	optional bool stockAvailable = 6; 
+}
+/* @Indexed */ 
+message CheckoutRequestDto { 
+	option java_package = "app.checkout.dto";
+	/* @Field(index = Index.YES, store = Store.YES) @SortableField */ 
+	optional string customerEmail = 1; 
+	/* @Field(index = Index.YES, store = Store.YES) @SortableField */ 
+	optional string customerId = 2; 
+	/* @Field(index = Index.YES, store = Store.YES) @SortableField */ 
+	repeated CartItemDto items = 3; 
+	/* @Field(index = Index.YES, store = Store.YES) @SortableField */ 
+	optional string paymentMethod = 4; 
+	/* @Field(index = Index.YES, store = Store.YES) @SortableField */ 
+	optional ShippingAddressDto shippingAddress = 5; 
+	/* @Field(index = Index.YES, store = Store.YES) @SortableField */ 
+	optional kogito.Serializable totalAmount = 6[(kogito_java_class) = "java.math.BigDecimal"]; 
+}
+/* @Indexed */ 
+message Checkout_process { 
+	option java_package = "app.checkout.bpm";
+	/* @Field(index = Index.YES, store = Store.YES) @SortableField */ 
+	optional string id = 1; 
+	/* @Field(index = Index.YES, store = Store.YES) @SortableField
+ @VariableInfo(tags="") */ 
+	optional string orderId = 2; 
+	/* @Field(index = Index.YES, store = Store.YES) @SortableField
+ @VariableInfo(tags="") */ 
+	optional bool paymentSuccess = 3; 
+	/* @Field(index = Index.YES, store = Store.YES) @SortableField
+ @VariableInfo(tags="") */ 
+	optional CheckoutRequestDto request = 4; 
+	/* @Field(index = Index.YES, store = Store.YES) @SortableField
+ @VariableInfo(tags="") */ 
+	optional bool stockAvailable = 5; 
+	/* @Field(index = Index.YES, store = Store.YES) @SortableField
+ @VariableInfo(tags="") */ 
+	optional CheckoutProcessData vars = 6; 
+	/* @Field(index = Index.YES, store = Store.YES) @SortableField */ 
+	optional org.kie.kogito.index.model.KogitoMetadata metadata = 7; 
+}
+/* @Indexed */ 
+message OrderItemDto { 
+	option java_package = "app.checkout.dto";
+	/* @Field(index = Index.YES, store = Store.YES) @SortableField */ 
+	optional string id = 1; 
+	/* @Field(index = Index.YES, store = Store.YES) @SortableField */ 
+	optional kogito.Serializable price = 2[(kogito_java_class) = "java.math.BigDecimal"]; 
+	/* @Field(index = Index.YES, store = Store.YES) @SortableField */ 
+	optional string productId = 3; 
+	/* @Field(index = Index.YES, store = Store.YES) @SortableField */ 
+	optional string productName = 4; 
+	/* @Field(index = Index.YES, store = Store.YES) @SortableField */ 
+	optional int32 quantity = 5; 
+	/* @Field(index = Index.YES, store = Store.YES) @SortableField */ 
+	optional kogito.Serializable subtotal = 6[(kogito_java_class) = "java.math.BigDecimal"]; 
+}
+/* @Indexed */ 
+message OrderResponseDto { 
+	option java_package = "app.checkout.dto";
+	/* @Field(index = Index.YES, store = Store.YES) @SortableField */ 
+	optional kogito.Serializable createdAt = 1[(kogito_java_class) = "java.time.LocalDateTime"]; 
+	/* @Field(index = Index.YES, store = Store.YES) @SortableField */ 
+	optional string customerEmail = 2; 
+	/* @Field(index = Index.YES, store = Store.YES) @SortableField */ 
+	optional string customerId = 3; 
+	/* @Field(index = Index.YES, store = Store.YES) @SortableField */ 
+	optional string id = 4; 
+	/* @Field(index = Index.YES, store = Store.YES) @SortableField */ 
+	repeated OrderItemDto items = 5; 
+	/* @Field(index = Index.YES, store = Store.YES) @SortableField */ 
+	optional string orderNumber = 6; 
+	/* @Field(index = Index.YES, store = Store.YES) @SortableField */ 
+	optional string orderStatus = 7; 
+	/* @Field(index = Index.YES, store = Store.YES) @SortableField */ 
+	optional string paymentMethod = 8; 
+	/* @Field(index = Index.YES, store = Store.YES) @SortableField */ 
+	optional string paymentStatus = 9; 
+	/* @Field(index = Index.YES, store = Store.YES) @SortableField */ 
+	optional string processInstanceId = 10; 
+	/* @Field(index = Index.YES, store = Store.YES) @SortableField */ 
+	optional string shippingAddress = 11; 
+	/* @Field(index = Index.YES, store = Store.YES) @SortableField */ 
+	optional kogito.Serializable totalAmount = 12[(kogito_java_class) = "java.math.BigDecimal"]; 
+	/* @Field(index = Index.YES, store = Store.YES) @SortableField */ 
+	optional kogito.Serializable updatedAt = 13[(kogito_java_class) = "java.time.LocalDateTime"]; 
+}
+/* @Indexed */ 
+message ShippingAddressDto { 
+	option java_package = "app.checkout.dto";
+	/* @Field(index = Index.YES, store = Store.YES) @SortableField */ 
+	optional string city = 1; 
+	/* @Field(index = Index.YES, store = Store.YES) @SortableField */ 
+	optional string phoneNumber = 2; 
+	/* @Field(index = Index.YES, store = Store.YES) @SortableField */ 
+	optional string postalCode = 3; 
+	/* @Field(index = Index.YES, store = Store.YES) @SortableField */ 
+	optional string province = 4; 
+	/* @Field(index = Index.YES, store = Store.YES) @SortableField */ 
+	optional string street = 5; 
+}
